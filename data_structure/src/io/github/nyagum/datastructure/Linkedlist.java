@@ -1,4 +1,5 @@
 package io.github.nyagum.datastructure;
+/*
 class Node
 {
 	public int Data;
@@ -9,6 +10,7 @@ class Node
 		this.next=null;
 	}
 }
+
 public class Linkedlist {
 	private Node headNode=null;
 	private int totalLangth=0;
@@ -126,9 +128,9 @@ public class Linkedlist {
 		singleLinkedList.insertData(7);
 		singleLinkedList.insertData(5,600);
 		singleLinkedList.insertData(10);
-		singleLinkedList.printAll();/*
+		singleLinkedList.printAll();
 		singleLinkedList.deleteNode(10); //마지막 노드 삭제
-		*/
+	
 		singleLinkedList.printAll();
 		singleLinkedList.deleteNode(5);
 		singleLinkedList.printAll();
@@ -136,3 +138,4 @@ public class Linkedlist {
 	//	singleLinkedList.printAll();
 	}
 }
+*/

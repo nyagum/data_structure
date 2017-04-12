@@ -1,4 +1,5 @@
 package io.github.nyagum.datastructure;
+/*
 class Node
 {
 	public int Data;
@@ -8,7 +9,7 @@ class Node
 		this.Data=data;
 		this.next=null;
 	}
-}
+}*/
 class Linkedlist {
 	private Node headNode=null;
 	private int totalLangth=0;
@@ -139,20 +140,5 @@ public class Stack {
 	}
 	public void printStack(){
 		linkedlist.printAll();
-	}
-	public static void main(String[] args)
-	{
-		Stack st=new Stack();
-		st.push(10);
-		st.push(9);
-		st.push(8);
-		st.push(7);
-		st.push(6);
-		st.push(5);
-		st.printStack();
-		st.pop();
-		st.pop();
-		st.pop();
-		st.pop();
 	}
 }

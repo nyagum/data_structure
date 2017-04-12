@@ -1,4 +1,5 @@
 package io.github.nyagum.datastructure;
+
 class Node
 {
 	public int Data;
@@ -12,12 +13,17 @@ class Node
 	}
 }
 
+
 public class doubleLinkedList
 {
 	private Node headNode=null;
 	private Node tailNode=null;
 	private int totalLangth=0;
 	
+	public int gettotalLangth()
+	{
+		return totalLangth;
+	}
 	public void insertData(int data)
 	{
 		Node newNode=new Node(data);
@@ -40,10 +46,19 @@ public class doubleLinkedList
 		
 		if(position==0)
 		{
-			newNode.next=headNode;
-			headNode.prev=newNode;
-			headNode=newNode;
-			totalLangth++;
+			if(headNode==null)
+			{
+				headNode=newNode;
+				tailNode=newNode;
+				totalLangth++;
+			}
+			else
+			{
+				newNode.next=headNode;
+				headNode.prev=newNode;
+				headNode=newNode;
+				totalLangth++;
+			}
 		}
 		else if(position==totalLangth)
 		{
@@ -69,35 +84,36 @@ public class doubleLinkedList
 		}else{}
 	}
 	
-	public void deleteNode()
+	public int deleteNode()
 	{
 		Node current=headNode;
-	
+		int returnData=0;
 		if(headNode==null && tailNode==null)
 		{
 			System.out.println("리스트는 비어 있습니다.");
-			
 		}
 		else
 		{
+			returnData=current.Data;
 			headNode=current.next;
 			current.next.prev=null;
 			current.next=null;
 			totalLangth--;
 		}
+		return returnData;
 	}
-	public void deleteNode(int position)
+	public int deleteNode(int position)
 	{
 		Node current=headNode;
 		int i=1;
+		int returnData=0;
 		if(position==0)
 		{
-			deleteNode();
+			returnData=deleteNode();
 		}
 		else if(position>totalLangth)
 		{
 			System.out.println("삭제할수 없습니다");
-			return;
 		}
 		else if(position==totalLangth)
 		{
@@ -118,6 +134,7 @@ public class doubleLinkedList
 			current.next.prev=current.prev;
 			totalLangth--;
 		}
+		return returnData;
 	}
 	public void printAllNode()
 	{
@@ -160,6 +177,8 @@ public class doubleLinkedList
 		System.out.println("totalLangth="+totalLangth);
 		System.out.println("=======================================");
 	}
+	
+	/*
 	public static void main(String[] args)
 	{
 		doubleLinkedList ddList=new doubleLinkedList();
@@ -183,5 +202,5 @@ public class doubleLinkedList
 	//	ddList.deleteNode(2);
 		ddList.printAllNode();
 		ddList.printReverse();
-	}
+	}*/
 }

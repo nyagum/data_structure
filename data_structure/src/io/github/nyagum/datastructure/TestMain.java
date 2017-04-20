@@ -4,20 +4,29 @@ public class TestMain
 {
 	public static void main(String[] args)
 	{
-		Queue myQueue=new Queue();
-		myQueue.EnQueue(1);
-		myQueue.EnQueue(11);
-		myQueue.EnQueue(12);
-		myQueue.EnQueue(13);
-		myQueue.EnQueue(14);
-		myQueue.EnQueue(15);
-		myQueue.EnQueue(16);
-		myQueue.EnQueue(17);
-		myQueue.EnQueue(18);
-		myQueue.printQueue();
-		//
-		myQueue.DeQueue();
-		myQueue.DeQueue();
-		myQueue.printQueue();
+		BinaryTree btree=new BinaryTree();
+		btree.insertData(20);
+		btree.InOrder(btree.getRoot());System.out.println();
+		btree.insertData(25);
+		btree.InOrder(btree.getRoot());System.out.println();
+		btree.insertData(15);
+		btree.InOrder(btree.getRoot());System.out.println();
+		btree.insertData(18);
+		btree.InOrder(btree.getRoot());System.out.println();
+		btree.insertData(10);
+		btree.InOrder(btree.getRoot());System.out.println();
+		btree.insertData(16);
+		btree.InOrder(btree.getRoot());System.out.println();
+		btree.insertData(19);
+		btree.InOrder(btree.getRoot());System.out.println();
+		if(btree.Find(15)){
+			System.out.println(" 찾았습니다.");
+		}else{
+			System.out.println("못찾았습니다.");
+		}
+		btree.Delete(15);
+		btree.InOrder(btree.getRoot());System.out.println();
+		//https://codereview.stackexchange.com/questions/65265/inserting-a-node-in-binary-search-tree
+		
 	}	
 }

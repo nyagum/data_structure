@@ -177,30 +177,4 @@ public class doubleLinkedList
 		System.out.println("totalLangth="+totalLangth);
 		System.out.println("=======================================");
 	}
-	
-	/*
-	public static void main(String[] args)
-	{
-		doubleLinkedList ddList=new doubleLinkedList();
-	//	ddList.printAllNode();
-	//	ddList.printReverse();
-		
-		ddList.insertData(1);
-		ddList.insertData(2);
-		ddList.insertData(3);
-		ddList.insertData(4);
-		ddList.insertData(5);
-		ddList.insertData(6);
-		ddList.insertData(7);
-		ddList.insertData(8);
-		ddList.insertData(9);
-		ddList.printAllNode();
-		ddList.printReverse();
-		ddList.deleteNode(9);
-		ddList.deleteNode(8);
-		ddList.deleteNode(2);
-	//	ddList.deleteNode(2);
-		ddList.printAllNode();
-		ddList.printReverse();
-	}*/
 }

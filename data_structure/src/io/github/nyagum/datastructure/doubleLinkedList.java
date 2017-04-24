@@ -1,23 +1,22 @@
 package io.github.nyagum.datastructure;
 
-class Node
+class DoubleLinkedListNode
 {
 	public int Data;
-	public Node next;
-	public Node prev;
+	public DoubleLinkedListNode next;
+	public DoubleLinkedListNode prev;
 	
-	public Node(int data){
+	public DoubleLinkedListNode(int data){
 		this.Data=data;
 		this.next=null;
 		this.prev=null;
 	}
 }
 
-
 public class doubleLinkedList
 {
-	private Node headNode=null;
-	private Node tailNode=null;
+	private DoubleLinkedListNode headNode=null;
+	private DoubleLinkedListNode tailNode=null;
 	private int totalLangth=0;
 	
 	public int gettotalLangth()
@@ -26,7 +25,7 @@ public class doubleLinkedList
 	}
 	public void insertData(int data)
 	{
-		Node newNode=new Node(data);
+		DoubleLinkedListNode newNode=new DoubleLinkedListNode(data);
 		if(headNode==null && tailNode==null)
 		{
 			headNode=newNode;
@@ -39,10 +38,10 @@ public class doubleLinkedList
 		}
 	}
 	public void insertData(int position, int data){
-		Node current=headNode;
-		Node prev=null;
+		DoubleLinkedListNode current=headNode;
+		DoubleLinkedListNode prev=null;
 		int i=1;
-		Node newNode=new Node(data);
+		DoubleLinkedListNode newNode=new DoubleLinkedListNode(data);
 		
 		if(position==0)
 		{
@@ -86,7 +85,7 @@ public class doubleLinkedList
 	
 	public int deleteNode()
 	{
-		Node current=headNode;
+		DoubleLinkedListNode current=headNode;
 		int returnData=0;
 		if(headNode==null && tailNode==null)
 		{
@@ -104,7 +103,7 @@ public class doubleLinkedList
 	}
 	public int deleteNode(int position)
 	{
-		Node current=headNode;
+		DoubleLinkedListNode current=headNode;
 		int i=1;
 		int returnData=0;
 		if(position==0)
@@ -138,7 +137,7 @@ public class doubleLinkedList
 	}
 	public void printAllNode()
 	{
-		Node current=headNode;
+		DoubleLinkedListNode current=headNode;
 		int i=1;
 		if(headNode==null && tailNode==null)
 		{
@@ -157,8 +156,9 @@ public class doubleLinkedList
 		System.out.println("totalLangth="+totalLangth);
 		System.out.println("=======================================");		
 	}
-	public void printReverse(){
-		Node current=tailNode;
+	public void printReverse()
+	{
+		DoubleLinkedListNode current=tailNode;
 		int i=totalLangth;
 		if(headNode==null && tailNode==null)
 		{

@@ -1,78 +1,13 @@
 package io.github.nyagum.datastructure;
-import java.lang.Integer;
-
-class BinaryTreeNode
-{
-	private int data;
-	private BinaryTreeNode left;
-	private BinaryTreeNode right;
-	public BinaryTreeNode(){
-		this.data=0;
-		this.left=null;
-		this.right=null;
-	}
-	public BinaryTreeNode(int data){
-		this.data=data;
-		this.left=null;
-		this.right=null;
-	}
-	public int compareTo(BinaryTreeNode newNode)
-	{
-	    return Integer.compare(this.data, newNode.data);
-	}
-	public void setLeftChild(BinaryTreeNode leftChild){
-		this.left=leftChild;
-	}
-	public BinaryTreeNode getLeftChild(){
-		return this.left;
-	}
-	public void setRightChild(BinaryTreeNode rightChild){
-		this.right=rightChild;
-	}
-	public BinaryTreeNode getRightChild(){
-		return this.right;
-	}
-	public int getData(){
-		return this.data;
-	}
-	public boolean hasLeftNode()
-	{
-		if(this.left==null){
-			return false;
-		}else{
-			return true;
-		}
-	}
-	public boolean hasRightNode()
-	{
-		if(this.right==null){
-			return false;
-		}else{
-			return true;
-		}
-	}
-	public boolean isLeafNode(){
-		if(hasLeftNode() && hasLeftNode())
-			return true;
-		else return false;
-	}
-	public int compareTo(int n){
-		if(n==this.data){
-			return 0;
-		}else if(n<this.data){
-			return -1;
-		}else{
-			return 1;
-		}
-		
-	}
-}
 
 public class BinaryTree {
 	private BinaryTreeNode root=null;
 	
 	public void InOrder(BinaryTreeNode root)
 	{
+		if(isEmpty()){
+			return;
+		}
 		if(root.hasLeftNode())
 		{
 			System.out.print(" {");
@@ -105,7 +40,6 @@ public class BinaryTree {
 	            insert(node, levelNode.getLeftChild());
 	        }
 	    } else {
-
 	        if (levelNode.getRightChild() == null) {
 	            levelNode.setRightChild(node);
 	        } else {
@@ -115,89 +49,169 @@ public class BinaryTree {
 	}
 	
 	public BinaryTreeNode getRoot() {
-		return root;
+		return this.root;
 	}
 	public boolean isEmpty()
 	{
 		if(root==null) return true;
 		else return false;
 	}
-	public boolean Find(int n){
+	public BinaryTreeNode Find(int n){
 		BinaryTreeNode currentNode=getRoot();
 		
 		while(currentNode!=null)
 		{	
-			switch(currentNode.compareTo(n))
-			{
-				case 1: currentNode=currentNode.getRightChild(); break;
-				case -1: currentNode=currentNode.getLeftChild(); break;
-				case 0: return true; 
+			if(currentNode.getData()==n){
+				return currentNode;
+			}else if(currentNode.getData()>n){
+				currentNode=currentNode.getLeftChild();
+			}else{
+				currentNode=currentNode.getRightChild();
 			}
 		}
-		return false;
+		return currentNode;
 	}
+	
+	
+	/**
+	 * 
+	 * @param n - 노드에서 삭제할 데이터
+	 * @return 삭제 성공 시 true, 삭제 실패시 false
+	 */
 	public boolean Delete(int n)
 	{
-		BinaryTreeNode deleteNode=getRoot();
-		BinaryTreeNode parentNode=null;
 		
-		while(deleteNode!=null)
-		{	
-			switch(deleteNode.compareTo(n))
-			{
-				case 1: 
-						parentNode=deleteNode;
-						deleteNode=deleteNode.getRightChild();
-						break;
-				case -1:
-						parentNode=deleteNode;
-						deleteNode=deleteNode.getLeftChild();
-						break;
-				case 0:
-						break;
-			}
+		BinaryTreeNode deleteNode=Find(n);
+		BinaryTreeNode parentNode=null;
+		boolean isLeftChild=false;
+		
+		if(root==null)
+		{
+			return false;
 		}
 		
-		
-		BinaryTreeNode Successor=FindSuccessorNode(deleteNode.getRightChild());
-		
-		if(deleteNode!=null){
-			Successor.setLeftChild(deleteNode.getLeftChild());
-			Successor.setRightChild(deleteNode.getRightChild());
-			//parentNode=Successor;
+		if(deleteNode==null)
+		{
+			return false;
+		}
+		else
+		{
+			while(deleteNode!=null)
+			{	
+				if(deleteNode.getData()==n)
+				{
+					break;
+				}
+				else if(deleteNode.getData()>n)
+				{
+					isLeftChild = true;
+					parentNode=deleteNode;
+					deleteNode=deleteNode.getLeftChild();
+				}
+				else
+				{
+					isLeftChild=false;
+					parentNode=deleteNode;
+					deleteNode=deleteNode.getRightChild();
+				}
+			}
+			
+			// 양쪽다 널인 leaf노드
+			if(deleteNode.isLeafNode()){
+				if(deleteNode==root)
+				{
+					
+					root=null;
+				}
+				if(isLeftChild){
+					parentNode.setLeftChild(null);
+				}else{
+					parentNode.setRightChild(null);
+				}
+			}
+			
+			
+			
+			
+			
+			
 			return true;
 		}
-		return false;
+		
+		
+		/*
+		BinaryTreeNode deleteNode=Find(n);
+		BinaryTreeNode parentNode=null;
+		boolean isLeftChild=false;
+		
+		
+		
+		
+		
+		if(deleteNode!=null)
+		{
+			while(deleteNode!=null)
+			{	
+				if(deleteNode.getData()==n){
+					break;
+				}else if(deleteNode.getData()>n){
+					isLeftChild = true;
+					parentNode=deleteNode;
+					deleteNode=deleteNode.getLeftChild();
+				}else{
+					isLeftChild=false;
+					parentNode=deleteNode;
+					deleteNode=deleteNode.getRightChild();
+				}
+			}
+			
+			
+			if(deleteNode.isLeafNode()){
+				if(deleteNode==getRoot()){
+					root=null;
+				}
+				if(isLeftChild){
+					parentNode.setLeftChild(null);
+				}else{
+					parentNode.setRightChild(null);
+				}
+			}
+			else if(deleteNode.hasLeftNode() && deleteNode.hasRightNode()==false)
+			{
+				if(deleteNode==null){
+					root=deleteNode.getLeftChild();
+				}else if(isLeftChild){
+					parentNode.setLeftChild(deleteNode.getRightChild());
+				}else{
+					parentNode.setRightChild(deleteNode.getRightChild());
+				}
+				
+			}
+			else if(deleteNode.hasLeftNode()==false && deleteNode.hasRightNode())
+			{
+				if(deleteNode==null){
+					root=deleteNode.getLeftChild();
+				}else if(isLeftChild){
+					parentNode.setRightChild(deleteNode.getRightChild());
+				}else{
+					parentNode.setLeftChild(deleteNode.getRightChild());
+				}				
+			}
+			else if(deleteNode.getLeftChild()!=null && deleteNode.getRightChild()!=null)
+			{
+				
+			}
+
+			return true;
+		}
+		else
+		{
+			return false;
+		}*/
 	}
 
 	private BinaryTreeNode FindSuccessorNode(BinaryTreeNode currentNode)
 	{
-		BinaryTreeNode preNode=null;
-		if(currentNode!=null){
-			while(currentNode.hasLeftNode()){
-				preNode=currentNode;
-				currentNode=currentNode.getLeftChild();
-			}
-			preNode.setLeftChild(null);
-			return currentNode;
-		}
-		return null;
-	}
-	private BinaryTreeNode FindNode(int n){
-		BinaryTreeNode currentNode=getRoot();
-		
-		while(currentNode!=null)
-		{	
-			switch(currentNode.compareTo(n))
-			{
-				case 1: currentNode=currentNode.getRightChild();
-						break;
-				case -1: currentNode=currentNode.getLeftChild();
-						break;
-				case 0:
-						return currentNode; 
-			}
-		}
 		return null;
 	}
 	

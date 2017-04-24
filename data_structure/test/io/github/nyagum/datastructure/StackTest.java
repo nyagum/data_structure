@@ -2,9 +2,6 @@ package io.github.nyagum.datastructure;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 
 public class StackTest
@@ -27,6 +24,8 @@ public class StackTest
 		myStack.push(5);
 		
 		myStack.pop();
+		
+		
 		
 	}
 

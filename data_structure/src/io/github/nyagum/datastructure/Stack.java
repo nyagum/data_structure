@@ -11,7 +11,7 @@ public class Stack
 
 	public int pop()
 	{
-		int popValue = linkedlist.deleteNode(1);
+		int popValue = linkedlist.get(0);
 		return popValue;
 	}
 

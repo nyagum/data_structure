@@ -1,8 +1,5 @@
 package io.github.nyagum.datastructure;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class SingleLinkedList {
 	private SingleLinkedListNode headNode;
 	private int totalLangth;
@@ -115,10 +112,10 @@ public class SingleLinkedList {
 		int returnValue = 0;
 		int i=0;
 		
-		if(size()==0){
+		if(size()==0 || size()<index){
 			return -1;
 		}
-	
+		
 		if (index == 0) // 처음노드
 		{
 			returnValue = current.Data;
@@ -158,6 +155,34 @@ public class SingleLinkedList {
 	}
 
 	/**
+	 * data를 주면 그에 맞는 리턴값을 줌
+	 * @param data
+	 * @return index리턴
+	 */
+	public int indexOf(int data)
+	{
+		SingleLinkedListNode current=headNode;
+		
+		if(size()==0)
+		{
+			return -1;
+		}
+		
+		for(int index=0; index<size(); index++)
+		{
+			if(current.Data==data)
+			{
+				return index;
+			}
+			else
+			{
+				current = current.next;
+			}
+		}
+		return -1;
+	} 
+	
+	/**
 	 * Linkedlist를 출력하는 메소드
 	 */
 	public void printAll()
@@ -169,35 +194,5 @@ public class SingleLinkedList {
 			System.out.print("["+i+"]="+current.Data+", ");
 		}
 		System.out.println("현재 LL의 길이는"+totalLangth);
-	}
-	
-	public static void main(String[] args) 
-	{	
-//		List<Integer> list=new LinkedList<Integer>();
-//		list.add(0, 100);
-//		System.out.println(list.indexOf(100));
-//		
-		
-		SingleLinkedList singleLinkedList=new SingleLinkedList();
-		singleLinkedList.add(2);
-		singleLinkedList.add(3);
-		singleLinkedList.add(4);
-		singleLinkedList.add(5);
-		singleLinkedList.printAll();
-		
-		singleLinkedList.add(0, 1);
-		singleLinkedList.printAll();
-		
-		singleLinkedList.add(6);
-		singleLinkedList.add(7);
-		singleLinkedList.add(5,600);
-		singleLinkedList.add(10);
-		singleLinkedList.printAll();
-		System.out.println(singleLinkedList.get(4));
-		singleLinkedList.printAll();
-		System.out.println(singleLinkedList.get(0));
-		singleLinkedList.printAll();
-		System.out.println(singleLinkedList.get(6));
-		singleLinkedList.printAll();
-	}
+	}	
 }

@@ -1,73 +1,89 @@
 package io.github.nyagum.datastructure;
 
-class DoubleLinkedListNode
-{
-	public int Data;
-	public DoubleLinkedListNode next;
-	public DoubleLinkedListNode prev;
-	
-	public DoubleLinkedListNode(int data){
-		this.Data=data;
-		this.next=null;
-		this.prev=null;
-	}
-}
+import java.util.LinkedList;
+import java.util.List;
+
 
 public class doubleLinkedList
 {
 	private DoubleLinkedListNode headNode=null;
 	private DoubleLinkedListNode tailNode=null;
-	private int totalLangth=0;
+	private int size=0;
 	
-	public int gettotalLangth()
+	/**
+	 * doubleLinkedList의 데이터 갯수를 리턴하는 함수
+	 * @return doubleLinkedList의 데이터 갯수
+	 */
+	public int size()
 	{
-		return totalLangth;
+		return size;
 	}
-	public void insertData(int data)
+	
+	/**
+	 * 리스트가 비었는지 안비었는지 여부 리턴
+	 * @return
+	 */
+	public boolean isEmpth(){return size==0;}
+
+	/**
+	 * 첫번째 노드에 데이터 추가
+	 * @param data
+	 */
+	public void add(int data)
 	{
+		
 		DoubleLinkedListNode newNode=new DoubleLinkedListNode(data);
 		if(headNode==null && tailNode==null)
 		{
 			headNode=newNode;
 			tailNode=newNode;
-			totalLangth++;
+			size++;
 		}
 		else
 		{
-			insertData(0, data);
+			add(0, data);
 		}
 	}
-	public void insertData(int position, int data){
+	
+	/**
+	 * 인덱스에 데이터를 추가
+	 * @param index
+	 * @param 제대로 추가가 되면 true 안되면 false
+	 */
+	public boolean add(int index, int data){
 		DoubleLinkedListNode current=headNode;
 		DoubleLinkedListNode prev=null;
-		int i=1;
+		int i=0;
 		DoubleLinkedListNode newNode=new DoubleLinkedListNode(data);
 		
-		if(position==0)
+		if(index==0)
 		{
 			if(headNode==null)
 			{
 				headNode=newNode;
 				tailNode=newNode;
-				totalLangth++;
+				size++;
 			}
 			else
 			{
 				newNode.next=headNode;
 				headNode.prev=newNode;
 				headNode=newNode;
-				totalLangth++;
+				size++;
 			}
+			return true;
 		}
-		else if(position==totalLangth)
+		else if(index==size)
 		{
 			newNode.prev=tailNode;
 			tailNode.next=newNode;
 			tailNode=newNode;
-			totalLangth++;
-		}else if(position<totalLangth)
+			size++;
+			return true;
+		}
+		else if(index<size)
 		{
-			while(i<=position)
+			while(i<index)
 			{
 				prev=current;
 				current=current.next;
@@ -78,63 +94,65 @@ public class doubleLinkedList
 			newNode.next=current;
 			current.prev=newNode;
 			
-			totalLangth++;
-			
-		}else{}
-	}
-	
-	public int deleteNode()
-	{
-		DoubleLinkedListNode current=headNode;
-		int returnData=0;
-		if(headNode==null && tailNode==null)
-		{
-			System.out.println("리스트는 비어 있습니다.");
+			size++;
+			return true;
 		}
 		else
 		{
+			return false;
+		}
+	}
+	
+	/**
+	 * 
+	 * @return 제대로 리턴되면 index의 해당되는 값을 리턴 아니면 -1를 리턴
+	 */
+	public int get(int index)
+	{
+		DoubleLinkedListNode current=headNode;
+		int returnData=0;
+		if(size()==0 || size()<index)
+		{
+			return -1;
+		}
+		
+		if(index==0)
+		{
+			
 			returnData=current.Data;
 			headNode=current.next;
 			current.next.prev=null;
 			current.next=null;
-			totalLangth--;
+			size--;
+			return returnData;
+			
 		}
-		return returnData;
-	}
-	public int deleteNode(int position)
-	{
-		DoubleLinkedListNode current=headNode;
-		int i=1;
-		int returnData=0;
-		if(position==0)
+		else if(index==size())
 		{
-			returnData=deleteNode();
-		}
-		else if(position>totalLangth)
-		{
-			System.out.println("삭제할수 없습니다");
-		}
-		else if(position==totalLangth)
-		{
+			
 			current=tailNode;
+			returnData=current.Data;
 			tailNode=current.prev;
 			current.prev.next=null;
 			current.prev=null;
-			totalLangth--;
+			size--;
+			return returnData;
 		}
-		else
+		else 
 		{
-			while(i<position)
+			for(int i=0; i<index; i++)
 			{
 				current=current.next;
-				i++;
 			}
 			current.prev.next=current.next;
 			current.next.prev=current.prev;
-			totalLangth--;
+			size--;
+			
+			return returnData;
 		}
-		return returnData;
 	}
+
+	
 	public void printAllNode()
 	{
 		DoubleLinkedListNode current=headNode;
@@ -153,13 +171,13 @@ public class doubleLinkedList
 				i++;
 			}
 		}
-		System.out.println("totalLangth="+totalLangth);
+		System.out.println("totalLangth="+size);
 		System.out.println("=======================================");		
 	}
 	public void printReverse()
 	{
 		DoubleLinkedListNode current=tailNode;
-		int i=totalLangth;
+		int i=size;
 		if(headNode==null && tailNode==null)
 		{
 			System.out.println("리스트는 비어 있습니다.");
@@ -174,7 +192,7 @@ public class doubleLinkedList
 				i--;
 			}
 		}
-		System.out.println("totalLangth="+totalLangth);
+		System.out.println("totalLangth="+size);
 		System.out.println("=======================================");
 	}
 }

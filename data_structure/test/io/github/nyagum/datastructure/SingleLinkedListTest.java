@@ -74,6 +74,5 @@ public class SingleLinkedListTest
 		int returnValue= singleLinkedList.indexOf(10);
 		
 		assertTrue(returnValue<0);
-		
 	}
 }

@@ -6,12 +6,12 @@ public class Queue
 
 	public void EnQueue(int data)
 	{
-		doublelinkedQueue.insertData(doublelinkedQueue.gettotalLangth(), data);
+		doublelinkedQueue.add(doublelinkedQueue.size(), data);
 	}
 
 	public int DeQueue()
 	{
-		return doublelinkedQueue.deleteNode();
+		return doublelinkedQueue.get(0);
 	}
 
 	public void printQueue()

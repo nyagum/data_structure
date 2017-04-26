@@ -2,21 +2,28 @@ package io.github.nyagum.datastructure;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+
+import org.junit.Before;
 import org.junit.Test;
 
 public class QueueTest
 {
-
+	private Queue queue;
+	@Before
+	public void setUp()
+	{
+		queue=new Queue();
+	}
+	
 	@Test
 	public void testEnQueue()
 	{
-		fail("Not yet implemented");
-	}
+		for(int i=0; i<1000; i++)
+		{
+			queue.EnQueue(i);
+		}
 
-	@Test
-	public void testDeQueue()
-	{
-		fail("Not yet implemented");
+		assertTrue(queue.DeQueue()==0);	
 	}
-
 }

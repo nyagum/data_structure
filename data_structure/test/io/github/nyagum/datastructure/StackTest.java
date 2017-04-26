@@ -2,39 +2,43 @@ package io.github.nyagum.datastructure;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+
+import org.junit.Before;
 import org.junit.Test;
 
 public class StackTest
 {
-
-	@Test
-	public void testPush()
-	{
-		fail("Not yet implemented");
-		
+	private Stack myStack;
+	@Before
+	public void setUp(){
+		myStack=new Stack();
 	}
-
 	@Test
 	public void testPop()
 	{
-		Stack myStack=new Stack();
+
+		for(int i=0; i<1000; i++)
+		{
+			myStack.push(1);
+		}
 		
+		int[] expectedValues=new int[1000];
+		Arrays.fill(expectedValues, 1);
+
+		int[] returnValues=new int[1000];
+		for(int i=0; i<1000; i++)
+			returnValues[i]=myStack.pop();
+		assertArrayEquals(expectedValues, returnValues);
+		
+	}
+	
+	@Test
+	public void testPop2(){
 		for(int i=0; i<1000; i++)
 		{
 			myStack.push(i);
 		}
-		
-		
-		myStack.pop();
-		
-		
-		
+		assertTrue(myStack.pop()==999);
 	}
-
-	@Test
-	public void testPrintStack()
-	{
-		fail("Not yet implemented");
-	}
-
 }

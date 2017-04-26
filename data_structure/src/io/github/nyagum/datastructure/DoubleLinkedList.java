@@ -1,10 +1,6 @@
 package io.github.nyagum.datastructure;
 
-import java.util.LinkedList;
-import java.util.List;
-
-
-public class doubleLinkedList
+public class DoubleLinkedList
 {
 	private DoubleLinkedListNode headNode=null;
 	private DoubleLinkedListNode tailNode=null;
@@ -23,13 +19,16 @@ public class doubleLinkedList
 	 * 리스트가 비었는지 안비었는지 여부 리턴
 	 * @return
 	 */
-	public boolean isEmpth(){return size==0;}
+	public boolean isEmpty()
+	{
+		return size==0;
+	}
 
 	/**
 	 * 첫번째 노드에 데이터 추가
 	 * @param data
 	 */
-	public void add(int data)
+	public boolean add(int data)
 	{
 		
 		DoubleLinkedListNode newNode=new DoubleLinkedListNode(data);
@@ -38,10 +37,11 @@ public class doubleLinkedList
 			headNode=newNode;
 			tailNode=newNode;
 			size++;
+			return true;
 		}
 		else
 		{
-			add(0, data);
+			return add(0, data);
 		}
 	}
 	
@@ -118,18 +118,16 @@ public class doubleLinkedList
 		
 		if(index==0)
 		{
-			
 			returnData=current.Data;
 			headNode=current.next;
 			current.next.prev=null;
 			current.next=null;
 			size--;
-			return returnData;
 			
+			return returnData;
 		}
 		else if(index==size())
-		{
-			
+		{		
 			current=tailNode;
 			returnData=current.Data;
 			tailNode=current.prev;

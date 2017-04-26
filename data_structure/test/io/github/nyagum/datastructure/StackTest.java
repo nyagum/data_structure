@@ -18,10 +18,12 @@ public class StackTest
 	public void testPop()
 	{
 		Stack myStack=new Stack();
-		myStack.push(10);
-		myStack.push(20);
-		myStack.push(1);
-		myStack.push(5);
+		
+		for(int i=0; i<1000; i++)
+		{
+			myStack.push(i);
+		}
+		
 		
 		myStack.pop();
 		

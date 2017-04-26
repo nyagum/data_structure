@@ -2,7 +2,7 @@ package io.github.nyagum.datastructure;
 
 public class Queue
 {
-	private doubleLinkedList doublelinkedQueue = new doubleLinkedList();
+	private DoubleLinkedList doublelinkedQueue = new DoubleLinkedList();
 
 	public void EnQueue(int data)
 	{

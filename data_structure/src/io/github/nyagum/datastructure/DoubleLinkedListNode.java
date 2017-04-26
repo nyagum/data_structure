@@ -11,4 +11,11 @@ class DoubleLinkedListNode
 		this.next=null;
 		this.prev=null;
 	}
+
+	public DoubleLinkedListNode()
+	{
+		this.Data=0;
+		this.next=null;
+		this.prev=null;
+	}
 }

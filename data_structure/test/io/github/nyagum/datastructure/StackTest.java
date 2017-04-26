@@ -20,12 +20,12 @@ public class StackTest
 
 		for(int i=0; i<1000; i++)
 		{
-			myStack.push(1);
+			myStack.push(i);
 		}
 		
 		int[] expectedValues=new int[1000];
-		Arrays.fill(expectedValues, 1);
-
+		Arrays.fill(expectedValues, 0, 0, 1000);
+		
 		int[] returnValues=new int[1000];
 		for(int i=0; i<1000; i++)
 			returnValues[i]=myStack.pop();

@@ -4,6 +4,7 @@ public class TestMain
 {
 	public static void main(String[] args)
 	{
+		
 		BinaryTree btree=new BinaryTree();
 		btree.insertData(20);
 		btree.InOrder(btree.getRoot());System.out.println();
